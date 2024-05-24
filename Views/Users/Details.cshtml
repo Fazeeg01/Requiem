@@ -1,0 +1,154 @@
+﻿@model GameStore.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Аватар
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Model.Avatar" alt="avatar" width="150px;"/>
+        </dd>
+        @if (ViewBag.My)
+        {
+            <dt class = "col-sm-2">
+                Логін
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Login)
+            </dd>
+            <dt class = "col-sm-2">
+                Пароль
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Password)
+            </dd>    
+        }
+        <dt class = "col-sm-2">
+            Ім'я
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            Прізвище
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            Роль
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if(ViewBag.My){
+        <p>
+            <a asp-action="Edit" asp-route-id="@Model.ID">Редагувати</a>
+        </p>
+    }
+</div>
+
+@if(Model.Games.Count() > 0)
+{
+    <h5>Мої інструменти</h5>
+    <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Логотип
+            </th>
+            <th>
+                Назва
+            </th>
+            <th>
+                Дата випуску
+            </th>
+            <th>
+                Виробник
+            </th>
+            <th>
+                Рейтинг
+            </th>
+            <th>
+                Жанр
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Games) {
+            <tr>
+                <td>
+                    <a asp-controller="Games" asp-action="Details" asp-route-id="@item.ID"><img src="@item.Image" alt="avatar" width="150px;"/></a>
+                </td>
+                <td>
+                    <a asp-controller="Games" asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Name)</a> 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Developer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Raiting)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.Name)
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}
+
+@if(Model.Orders.Count > 0)
+{
+    <h5>Придбані інструменти</h5>
+    <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Обкладинка
+            </th>
+            <th>
+                Інструменти
+            </th>
+            <th>
+                Дата придбання
+            </th>
+            <th>
+                Операції
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Orders) {
+        <tr>
+            <td>
+                <a asp-controller="Games" asp-action="Details" asp-route-id="@item.ID"><img src="@item.Game.Image" alt="avatar" width="150px;"/></a>
+            </td>
+            <td>
+                <a asp-controller="Games" asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Game.Name)</a> 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-controller="Orders" asp-route-id="@item.ID" asp-action="Return">Повернути гру</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}

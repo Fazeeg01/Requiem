@@ -1,0 +1,48 @@
+﻿@model GameStore.Models.Requirement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div>
+    <h5>Системні вимоги</h5>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Операційна система
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OS)
+        </dd>
+        <dt class = "col-sm-2">
+            Процесор
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CPU)
+        </dd>
+        <dt class = "col-sm-2">
+            Відеокарта
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GPU)
+        </dd>
+        <dt class = "col-sm-2">
+            Оперативна пам'ять
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RAM)
+        </dd>
+        <dt class = "col-sm-2">
+            Місце на жорсткому диску
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ROM)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Редагувати</a>
+    
+</div>

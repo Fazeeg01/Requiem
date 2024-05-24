@@ -1,0 +1,57 @@
+﻿@model GameStore.Models.Requirement
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Системні вимоги</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OS" class="control-label">Операційна система</label>
+                <input asp-for="OS" class="form-control" />
+                <span asp-validation-for="OS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPU" class="control-label">Процесор (GHz)</label>
+                <input asp-for="CPU" class="form-control" />
+                <span asp-validation-for="CPU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GPU" class="control-label">Выдеокарта (Mb)</label>
+                <input asp-for="GPU" class="form-control" />
+                <span asp-validation-for="GPU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RAM" class="control-label">Оперативна пам'ять (Mb)</label>
+                <input asp-for="RAM" class="form-control" />
+                <span asp-validation-for="RAM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ROM" class="control-label">Місце на жорсткому диску (Gb)</label>
+                <input asp-for="ROM" class="form-control" />
+                <span asp-validation-for="ROM" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="GameID" class="control-label"></label>
+                <select asp-for="GameID" class ="form-control" asp-items="ViewBag.GameID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Додати" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
